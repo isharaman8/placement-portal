@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import CompenyCard from '../Component/CompenyCard'
+import CompenyCard from '../Component/Card/CompenyCard'
 
 const Compney = () => {
   const [compenies,setCompenies]=useState([1,2,3,4,5])

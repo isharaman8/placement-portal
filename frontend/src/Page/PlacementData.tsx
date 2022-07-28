@@ -1,8 +1,10 @@
+import PlacementDataChart from "../Component/PlacementDataChart"
 
 const PlacementData = () => {
   return (
     <div>
-      placement data page
+      
+      <PlacementDataChart/>
     </div>
   )
 }

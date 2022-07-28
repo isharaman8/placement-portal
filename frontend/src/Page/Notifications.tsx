@@ -1,5 +1,5 @@
 import { useState } from "react"
-import NotificationCard from "../Component/NotificationCard";
+import NotificationCard from "../Component/Card/NotificationCard";
 
 
 const Notifications = () => {
