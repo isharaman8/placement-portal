@@ -14,11 +14,11 @@ export class Company {
   description: string;
 
   @Prop({
-    type: [{ usersApplied: { type: MySchema.Types.ObjectId, ref: 'Users' } }],
+    type: [{ usersApplied: { type: MySchema.Types.ObjectId, ref: 'User' } }],
   })
   usersApplied: User;
 
-  @Prop({ type: MySchema.Types.ObjectId, ref: 'Users' })
+  @Prop({ type: MySchema.Types.ObjectId, ref: 'User' })
   author: User;
 }
 
