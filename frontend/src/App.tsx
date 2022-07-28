@@ -4,6 +4,7 @@ import NotificationCard from './Component/NotificationCard'
 import AllUser from './Page/AllUser'
 import Compney from './Page/Compney'
 import HomePage from './Page/HomePage'
+import Notifications from './Page/Notifications'
 import PlacementData from './Page/PlacementData'
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
      
       <Routes>
         <Route path="/" element={<HomePage/>}></Route>
-        <Route path='/notification' element={<NotificationCard />}></Route>
+        <Route path='/notification' element={<Notifications/>}></Route>
         <Route path='/alluser' element={<AllUser />}></Route>
         <Route path="/compeny" element={<Compney/>}></Route>
         <Route path="placementdata" element={<PlacementData/>}></Route>

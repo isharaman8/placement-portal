@@ -1,9 +1,10 @@
 import React from 'react'
+import AllUserCard from '../Component/AllUserCard'
 
 const AllUser = () => {
   return (
     <div>
-      AllUser page
+      <AllUserCard/>
     </div>
   )
 }
