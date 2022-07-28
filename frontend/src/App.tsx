@@ -8,17 +8,24 @@ import HomePage from "./Page/HomePage";
 import Notifications from "./Page/Notifications";
 import PlacementData from "./Page/PlacementData";
 import { Login } from "./Page/Login";
+import { Navbar } from "./Component/Navbar/Navbar";
+import { UserSidebar } from "./Component/Sidebar/User/UserSidebar";
 
 function App() {
   return (
     <div className="">
+      <Navbar />
+      {/* <div>
+          {" "}
+          <UserSidebar />
+        </div> */}
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/notification" element={<Notifications />}></Route>
         <Route path="/alluser" element={<AllUser />}></Route>
-        <Route path="/compeny" element={<Compney />}></Route>
-        <Route path="placementdata" element={<PlacementData />}></Route>
+        <Route path="/company" element={<Compney />}></Route>
+        <Route path="/placementdata" element={<PlacementData />}></Route>
       </Routes>
     </div>
   );
