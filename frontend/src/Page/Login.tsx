@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Navbar } from "../Component/Navbar/Navbar";
 import "./login.css";
 export const Login = () => {
   const [disable, setDisable] = useState(false);
   return (
     <div>
-      <Navbar />
       <img className="wave" src="./wave.png" />
       <div className="container">
         <div className="img">
