@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import { Navbar } from "./Components/Navbar/Navbar";
-import { AdminSidebar } from "./Components/Sidebar/Admin/AdminSidebar";
-import { RecruiterSidebar } from "./Components/Sidebar/Recruiter/RecruiterSidebar";
-import { UserSidebar } from "./Components/Sidebar/User/UserSidebar";
+import { Navbar } from "./Component/Navbar/Navbar";
+import { AdminSidebar } from "./Component/Sidebar/Admin/AdminSidebar";
+import { RecruiterSidebar } from "./Component/Sidebar/Recruiter/RecruiterSidebar";
+import { UserSidebar } from "./Component/Sidebar/User/UserSidebar";
 function App() {
   const [count, setCount] = useState(0);
 
