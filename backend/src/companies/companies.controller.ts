@@ -18,7 +18,7 @@ export class CompaniesController {
   @UseGuards(JwtAuthGuard)
   @Post('addcompany')
   async addCompany(@Request() req: any, @Body() dto: CompanyDto) {
-    const data = await this.companyService.addCompanies(req, dto);
+    const data = await this.companyService.addCompany(req, dto);
     return data;
   }
 

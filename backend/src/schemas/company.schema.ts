@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Schema as MySchema } from 'mongoose';
 import Document from 'mongoose';
-import { User } from './user.schema';
+// import { User } from './user.schema';
 
 export type CompanyDocument = Company & Document;
 
@@ -13,18 +13,16 @@ export class Company {
   @Prop()
   description: string;
 
-  @Prop({
-    type: [
-      {
-        type: MySchema.Types.ObjectId,
-        ref: 'User',
-      },
-    ],
-  })
-  usersApplied: User[];
-
   @Prop({ type: MySchema.Types.ObjectId, ref: 'User' })
-  author: User;
+  author: string;
+
+  @Prop({
+    type: [{ type: MySchema.Types.ObjectId, ref: 'User' }],
+    required: true,
+    unique: true,
+    sparse: true,
+  })
+  usersApplied: string[];
 }
 
 export const CompanySchema = SchemaFactory.createForClass(Company);
