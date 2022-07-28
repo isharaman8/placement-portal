@@ -7,16 +7,21 @@ export type CompanyDocument = Company & Document;
 
 @Schema({ timestamps: true })
 export class Company {
-  @Prop({ unique: true, required: true })
+  @Prop({ required: true })
   name: string;
 
   @Prop()
   description: string;
 
   @Prop({
-    type: [{ usersApplied: { type: MySchema.Types.ObjectId, ref: 'User' } }],
+    type: [
+      {
+        type: MySchema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   })
-  usersApplied: User;
+  usersApplied: User[];
 
   @Prop({ type: MySchema.Types.ObjectId, ref: 'User' })
   author: User;

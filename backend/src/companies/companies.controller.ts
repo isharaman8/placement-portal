@@ -33,4 +33,14 @@ export class CompaniesController {
   async getAllCompanies() {
     return this.companyService.getAllCompanies();
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('applyforcompany')
+  async applyForCompany(
+    @Request() req: any,
+    @Body() dto: { companyID: string },
+  ) {
+    const data = await this.companyService.applyForCompany(req, dto.companyID);
+    return data;
+  }
 }

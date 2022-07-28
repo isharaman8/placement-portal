@@ -20,4 +20,7 @@ export class AuthDto {
 
   @IsArray()
   companiesApplied: Array<any>;
+
+  @IsArray()
+  friends: Array<any>;
 }
