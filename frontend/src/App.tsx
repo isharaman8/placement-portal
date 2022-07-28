@@ -7,12 +7,14 @@ import Compney from "./Page/Compney";
 import HomePage from "./Page/HomePage";
 import Notifications from "./Page/Notifications";
 import PlacementData from "./Page/PlacementData";
+import { Login } from "./Page/Login";
 
 function App() {
   return (
     <div className="">
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
+        <Route path="/login" element={<Login />}></Route>
         <Route path="/notification" element={<Notifications />}></Route>
         <Route path="/alluser" element={<AllUser />}></Route>
         <Route path="/compeny" element={<Compney />}></Route>
