@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import React from 'react'
 
 const AllUserCard = () => {
@@ -10,12 +11,10 @@ const AllUserCard = () => {
       <div className="space-y-1 items-center">
         <h1 className="text-xl font-semibold">Ashok Zarmariya</h1>
           <p>ashok@gmail.com</p>
-          <p>9933223487</p>
       </div>
     </div>
     <div>
-      
-      
+    <Button variant="contained">Send Request</Button> 
     </div>
   </div>
   )
