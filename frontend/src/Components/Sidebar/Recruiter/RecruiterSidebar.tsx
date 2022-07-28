@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 
-export const Sidebar = () => {
+export const RecruiterSidebar = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
     { title: "Dashboard", src: "Chart_fill" },
-    { title: "Form", src: "Chat" },
-    { title: "Students", src: "User", gap: true },
-    { title: "Company ", src: "Calendar" },
+    { title: "Applications", src: "User", gap: true },
+    { title: "Current Hiring", src: "Calendar" },
     { title: "Search", src: "Search" },
     { title: "Analytics", src: "Chart" },
     { title: "Notifications ", src: "Folder", gap: true },
-    { title: "Setting", src: "Setting" },
   ];
   return (
     <div className="">
@@ -23,15 +21,15 @@ export const Sidebar = () => {
           <img
             src="./src/assets/control.png"
             className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple bg-black
-           border-2 rounded-full  ${!open && "rotate-180"}`}
+             border-2 rounded-full  ${!open && "rotate-180"}`}
             onClick={() => setOpen(!open)}
           />
           {/* <img
-            src="./src/assets/control.png"
-            className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
-           border-2 rounded-full  ${!open && "rotate-180"}`}
-            onClick={() => setOpen(!open)}
-          /> */}
+              src="./src/assets/control.png"
+              className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
+             border-2 rounded-full  ${!open && "rotate-180"}`}
+              onClick={() => setOpen(!open)}
+            /> */}
           <div className="flex gap-x-4 items-center">
             <img
               src="./src/assets/logo.png"
@@ -45,7 +43,7 @@ export const Sidebar = () => {
                 !open && "scale-0"
               }`}
             >
-              Admin
+              Recruiter
             </h1>
           </div>
           <ul className="pt-6">
@@ -53,7 +51,7 @@ export const Sidebar = () => {
               <li
                 key={index}
                 className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} ${
+                ${Menu.gap ? "mt-9" : "mt-2"} ${
                   index === 0 && "bg-light-white"
                 } `}
               >

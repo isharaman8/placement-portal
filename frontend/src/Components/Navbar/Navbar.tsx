@@ -5,7 +5,7 @@ export const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg bg-slate-900 h-20 flex  items-center justify-between ">
         <div className="flex ">
-          <div className="w-12 h-12 bg-slate-900 flex items-center justify-center">
+          <div className=" w-12 h-12 bg-slate-900 flex items-center justify-center sm:ml-2 ">
             <svg
               className="w-8  h-8 bg-slate-900 text-white "
               fill="none"
@@ -21,9 +21,9 @@ export const Navbar = () => {
               ></path>
             </svg>
           </div>
-          <div className="ml-20  bg-slate-900 flex items-center justify-center">
+          <div className="ml-20  bg-slate-900 flex items-center justify-center md:pr-3 md:mr-2">
             <input
-              className="shadow appearance-none border rounded w-full py-1.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="  shadow appearance-none border rounded w-full py-1.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="text"
               placeholder="Search..."

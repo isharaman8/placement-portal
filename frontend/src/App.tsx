@@ -1,14 +1,18 @@
 import { useState } from "react";
 import "./App.css";
 import { Navbar } from "./Components/Navbar/Navbar";
-import { Sidebar } from "./Components/Sidebar/Sidebar";
+import { AdminSidebar } from "./Components/Sidebar/Admin/AdminSidebar";
+import { RecruiterSidebar } from "./Components/Sidebar/Recruiter/RecruiterSidebar";
+import { UserSidebar } from "./Components/Sidebar/User/UserSidebar";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <div className="App">
       <Navbar />
-      <Sidebar />
+      {/* <AdminSidebar /> */}
+      {/* <UserSidebar /> */}
+      <RecruiterSidebar />
     </div>
   );
 }
