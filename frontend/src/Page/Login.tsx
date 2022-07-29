@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import "./login.css";
 export const Login = () => {
   const [disable, setDisable] = useState(false);
+  const [userData, setUserData] = useState({
+    name:"",
+    email: "",
+    password: "",
+    role:""
+  });
+
+
+
   return (
     <div className="bg-slate-100">
       <img className="wave" src="./wave.png" />
@@ -24,9 +33,9 @@ export const Login = () => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                     ></path>
                   </svg>{" "}
@@ -37,7 +46,46 @@ export const Login = () => {
                 </div>
               </div>
             ) : null}
+            {disable ? (
+              <div className="input-div one">
+                <div className="i">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    ></path>
+                  </svg>{" "}
+                </div>
+                <div className="">
+                  <label Html-for="underline_select" className="sr-only">
+                    Underline select
+                  </label>
+                  {/* <h5>Role</h5> */}
 
+                  <select
+                    id="underline_select"
+                    className="block py-2.5  ml-3 text-lg text-white bg-transparent border-0 bg-slate-600 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                  >
+                    <option selected className="">
+                      Role
+                    </option>
+                    <option value="Admin" className="">
+                      Admin
+                    </option>
+                    <option value="Student">Student</option>
+                    <option value="Recruiter">Recruiter</option>
+                  </select>
+                </div>
+              </div>
+            ) : null}
             <div className="input-div one">
               <div className="i">
                 <svg
@@ -48,9 +96,9 @@ export const Login = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   ></path>
                 </svg>{" "}
@@ -70,9 +118,9 @@ export const Login = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                   ></path>
                 </svg>{" "}

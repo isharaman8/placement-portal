@@ -14,10 +14,7 @@ function App() {
   return (
     <div className="bg-slate-600">
       <Navbar />
-      {/* <div>
-          {" "}
-          <UserSidebar />
-        </div> */}
+
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/login" element={<Login />}></Route>
