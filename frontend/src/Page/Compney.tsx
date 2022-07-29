@@ -19,7 +19,7 @@ const Compney = () => {
         All The Upcoming Companies On This Week
       </h1>
       <div
-      
+         
       className='px-36 py-5 space-y-2'>
 
       {companies.slice((page - 1) * 5, page * 5).map((item) => <CompenyCard num={item} />)}
