@@ -17,8 +17,9 @@ const CompenyCard = () => {
         
       </div>
     </div>
-    <div>
-    <Button variant='contained'>Apply</Button>
+    <div className='flex flex-col space-y-1'>
+        <Button variant='contained'>Apply</Button>
+        <Button variant='contained'>Add To Current Hiring</Button>
     </div>
   </div>
   )
