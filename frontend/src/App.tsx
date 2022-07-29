@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import NotificationCard from "./Component/NotificationCard";
 import AllUser from "./Page/AllUser";
 import Compney from "./Page/Compney";
 import HomePage from "./Page/HomePage";
