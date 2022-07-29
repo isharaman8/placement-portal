@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import AllUserCard from '../Component/Card/AllUserCard'
 import PaginationComponent from '../Component/PaginationComponent';
@@ -17,9 +18,8 @@ const AllUser = () => {
           <PaginationComponent page={page} handleChange={handleChange} totlePage={ users.length/8}/>
         </div>
       </div>
-      
     </div>
-  )
-}
+  );
+};
 
-export default AllUser
+export default AllUser;

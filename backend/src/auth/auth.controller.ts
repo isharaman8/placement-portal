@@ -9,7 +9,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import * as argon from 'argon2';
 import { AuthDto } from 'src/dto';
 import { JwtAuthGuard } from './jwt.guard';
 
