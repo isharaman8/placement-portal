@@ -193,6 +193,11 @@ export class AuthService {
         { $push: { friends: userID } },
         { new: true, populate: { path: 'friends', select: { name: 1 } } },
       );
+
+      await this.userModel.findByIdAndUpdate(userID, {
+        $push: { friends: updatedUser._id.toString() },
+      });
+
       return updatedUser;
     } catch (err) {
       switch (err.status) {
