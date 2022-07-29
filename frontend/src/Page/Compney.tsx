@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
 import CompenyCard from "../Component/Card/CompenyCard";
 import PaginationComponent from "../Component/PaginationComponent";
-import { AdminSidebar } from "../Component/Sidebar/Admin/AdminSidebar";
-import { RecruiterSidebar } from "../Component/Sidebar/Recruiter/RecruiterSidebar";
 
 const Compney = () => {
   const [companies, setCompanies] = useState([

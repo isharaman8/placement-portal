@@ -6,7 +6,7 @@ interface props {
 }
 const CompenyCard = ({ num }: props) => {
   return (
-    <div className="py-3  bg-white rounded-md flex justify-between items-center px-5">
+    <div className="py-5   bg-white rounded-md flex justify-between items-center px-5">
       <div className="flex items-center space-x-7 ">
         <img
           className="h-16 w-16 rounded-full"
