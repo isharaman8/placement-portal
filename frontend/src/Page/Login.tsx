@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { userLoginRequest, userSignUpRequest } from "../Redux/Actions/action";
+import {
+	userLogin,
+	userLoginRequest,
+	userSignUpRequest,
+} from "../Redux/Actions/action";
 import "./login.css";
 import { connect } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 export const Login = () => {
 	const [disable, setDisable] = useState(false);
@@ -12,20 +18,41 @@ export const Login = () => {
 		password: "",
 		role: "",
 	});
+
+	const navigate = useNavigate();
+
 	const dispatch: any = useDispatch();
 
-	const handleSignup = (event: any) => {
+	const handleSignup = async (event: any) => {
 		event.preventDefault();
 		console.log(userData);
-		dispatch(userSignUpRequest(userData));
+		// dispatch(userSignUpRequest(userData));
+		const res = await axios.post(
+			"https://placements-backend-hackathon.herokuapp.com/auth/signup",
+			userData
+		);
+		localStorage.setItem("SignUpUser", JSON.stringify(res));
 	};
-	const handleLogin = (event: any) => {
+	const handleLogin = async (event: any) => {
 		event.preventDefault();
 		const obj = {
 			emailID: userData.emailID,
 			password: userData.password,
 		};
-		dispatch(userLoginRequest(obj));
+
+		try {
+			const res = await axios.post(
+				"https://placements-backend-hackathon.herokuapp.com/auth/signin",
+				obj
+			);
+			// localStorage.setItem("loggedInUser", JSON.stringify(res));
+			dispatch(userLogin(res));
+			navigate("/");
+		} catch (error: any) {
+			alert(error.message);
+		}
+
+		// dispatch(userLoginRequest(obj));
 
 		console.log(obj);
 	};
@@ -101,12 +128,14 @@ export const Login = () => {
 												setUserData({ ...userData, role: event.target.value });
 											}}
 										>
-											<option className="">Role</option>
-											<option value="Admin" className="">
+											<option className="" disabled>
+												Role
+											</option>
+											<option value="admin" className="">
 												Admin
 											</option>
-											<option value="Student">Student</option>
-											<option value="Recruiter">Recruiter</option>
+											<option value="student">Student</option>
+											<option value="employer">Employer</option>
 										</select>
 									</div>
 								</div>
