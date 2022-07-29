@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AllUserCard from "../Component/Card/AllUserCard";
 import PaginationComponent from "../Component/PaginationComponent";
-import { AdminSidebar } from "../Component/Sidebar/Admin/AdminSidebar";
 
 const AllUser = () => {
   const [users, setUsers] = useState([
@@ -13,18 +12,17 @@ const AllUser = () => {
   };
   return (
     <div>
-      <div className="grid grid-cols-5 gap-3 pt-20 ml-24">
+      <div className="grid grid-cols-5 gap-3 pt-20 ml-24 lg:flex flex-col lg:mx-auto pl-12">
         {users.slice((page - 1) * 10, page * 10).map((item) => (
           <AllUserCard num={item} />
         ))}
-
-        <div>
-          <PaginationComponent
-            page={page}
-            handleChange={handleChange}
-            totlePage={users.length / 8}
-          />
-        </div>
+      </div>
+      <div>
+        <PaginationComponent
+          page={page}
+          handleChange={handleChange}
+          totlePage={users.length / 8}
+        />
       </div>
     </div>
   );

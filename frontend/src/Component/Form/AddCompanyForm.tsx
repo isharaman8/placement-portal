@@ -1,6 +1,5 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { AdminSidebar } from "../Sidebar/Admin/AdminSidebar";
 import Toas from "../Toas";
 
 const AddCompanyForm = () => {
@@ -9,8 +8,8 @@ const AddCompanyForm = () => {
 
   return (
     <div>
-      <div className="space-y-5 border rounded-md py-10 px-64 bg-[#9f9f9f] pt-20">
-        <h1 className="font-bold text-white text-3xl text-center pb-5">
+      <div className="space-y-5 border rounded-md py-10 px-64 bg-[rgb(75,105,149)] pt-20">
+        <h1 className="font-bold text-slate-800 text-3xl text-center pb-5">
           Add Upcoming Company
         </h1>
 
@@ -49,7 +48,7 @@ const AddCompanyForm = () => {
         </div>
         <div>
           <label className="w-full text-lg font-semibold" htmlFor="vacency">
-            Vacency
+            Vacancy
           </label>
           <input
             className="w-full py-3 px-5 rounded-md outline-none"
