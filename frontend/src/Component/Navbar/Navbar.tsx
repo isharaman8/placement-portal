@@ -8,11 +8,11 @@ export const Navbar = () => {
   const navigate = useNavigate();
   return (
     <div className="fixed w-full overflow-y-hidden z-50 ">
-      <nav className="navbar navbar-expand-lg bg-slate-900 h-20 flex  items-center justify-between   overflow-hidden">
+      <nav className="navbar navbar-expand-lg bg-slate-800 h-16 flex  items-center justify-between   overflow-hidden">
         <div className="flex ">
-          <div className=" w-12 h-12 bg-slate-900 flex items-center justify-center sm:ml-2 ">
+          <div className=" w-12 h-12 bg-slate-800 flex items-center justify-center sm:ml-2 ">
             <svg
-              className="w-8  h-8 bg-slate-900 text-white "
+              className="w-8  h-8 bg-slate-800 text-white "
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -27,15 +27,15 @@ export const Navbar = () => {
             </svg>
           </div>
         </div>
-        <div className="bg-slate-900 flex items-center justify-center text-slate-100 space-x-4 mr-12">
-          <div className="ml-20  bg-slate-900 flex items-center justify-center md:pr-3 md:mr-2">
+        <div className="bg-slate-800 flex items-center justify-center text-slate-100 space-x-4 mr-12">
+          <div className="ml-20  bg-slate-800 flex items-center justify-center md:pr-3 md:mr-2">
             <input
-              className=" lg:hidden shadow appearance-none border  w-full py-0.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" lg:hidden shadow appearance-none border rounded-sm w-full py-0.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="text"
               placeholder="Search..."
             />
-            <button className="ml-0.5 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-md text-sm px-4 py-1.5 text-center mr-2 ">
+            <button className="ml-0.5 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-sm text-sm px-4 py-1.5 text-center mr-2 ">
               <svg
                 className="w-4 h-4 text-white "
                 fill="none"
@@ -80,7 +80,7 @@ export const Navbar = () => {
           <div>
             <button
               type="button"
-              className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              className="bg-gray-800 flex text-sm rounded-full focus:outline-none "
               id="user-menu-button"
               aria-expanded="false"
               aria-haspopup="true"
@@ -113,7 +113,7 @@ export const Navbar = () => {
           <div
             className={`${
               isOpen
-                ? "block origin-top-right absolute top-20 right-1 mt-2 w-48 rounded-md shadow-lg py-1 bg-slate-700 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                ? "block origin-top-right z-50 absolute top-20 right-1 mt-2 w-48 rounded-md shadow-lg py-1 bg-slate-700 ring-1 ring-black ring-opacity-5 focus:outline-none"
                 : "hidden"
             }`}
             role="menu"

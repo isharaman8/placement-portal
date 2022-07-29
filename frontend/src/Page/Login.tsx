@@ -3,7 +3,7 @@ import "./login.css";
 export const Login = () => {
   const [disable, setDisable] = useState(false);
   return (
-    <div>
+    <div className="bg-slate-100">
       <img className="wave" src="./wave.png" />
       <div className="container">
         <div className="img">

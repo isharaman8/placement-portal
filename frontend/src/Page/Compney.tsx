@@ -14,6 +14,7 @@ const Compney = () => {
 
   return (
     <div>
+
       <h1
         className='py-5 text-center text-3xl font-semibold'
         ref={cardRef}>
@@ -28,6 +29,7 @@ const Compney = () => {
         <div>
           <PaginationComponent page={page} handleChange={handleChange} totlePage={companies.length / 5} />
         </div>
+
 
       </div>
     </div>

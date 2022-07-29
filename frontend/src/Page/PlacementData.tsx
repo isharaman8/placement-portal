@@ -7,11 +7,13 @@ const PlacementData = () => {
   return (
     <div>
 
+
       
 
       <div>
       <PlacementDataChart/>
         <div className=" absolute left-0 top-20">
+
           {" "}
           <UserSidebar />
         </div>
