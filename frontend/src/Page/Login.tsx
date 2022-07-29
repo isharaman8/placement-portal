@@ -3,14 +3,24 @@ import "./login.css";
 export const Login = () => {
   const [disable, setDisable] = useState(false);
   const [userData, setUserData] = useState({
-    name:"",
-    email: "",
+    name: "",
+    emailID: "",
     password: "",
-    role:""
+    role: "",
   });
 
-
-
+  const handleSignup = (event: any) => {
+    event.preventDefault();
+    console.log(userData);
+  };
+  const handleLogin = (event: any) => {
+    event.preventDefault();
+    const obj = {
+      emailID: userData.emailID,
+      password: userData.password,
+    };
+    console.log(obj);
+  };
   return (
     <div className="bg-slate-100">
       <img className="wave" src="./wave.png" />
@@ -41,8 +51,14 @@ export const Login = () => {
                   </svg>{" "}
                 </div>
                 <div className="div">
-                  <h5>Name</h5>
-                  <input type="text" className="input" />
+                  <input
+                    type="text"
+                    className="input"
+                    placeholder="Name"
+                    onChange={(e) => {
+                      setUserData({ ...userData, name: e.target.value });
+                    }}
+                  />
                 </div>
               </div>
             ) : null}
@@ -65,18 +81,18 @@ export const Login = () => {
                   </svg>{" "}
                 </div>
                 <div className="">
-                  <label Html-for="underline_select" className="sr-only">
+                  <label html-for="underline_select" className="sr-only">
                     Underline select
                   </label>
-                  {/* <h5>Role</h5> */}
 
                   <select
                     id="underline_select"
                     className="block py-2.5  ml-3 text-lg text-white bg-transparent border-0 bg-slate-600 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                    onChange={(event) => {
+                      setUserData({ ...userData, role: event.target.value });
+                    }}
                   >
-                    <option selected className="">
-                      Role
-                    </option>
+                    <option className="">Role</option>
                     <option value="Admin" className="">
                       Admin
                     </option>
@@ -104,8 +120,14 @@ export const Login = () => {
                 </svg>{" "}
               </div>
               <div className="div">
-                <h5>Email</h5>
-                <input type="email" className="input" />
+                <input
+                  type="email"
+                  className="input"
+                  placeholder="Email"
+                  onChange={(e) => {
+                    setUserData({ ...userData, emailID: e.target.value });
+                  }}
+                />
               </div>
             </div>
             <div className="input-div pass">
@@ -126,8 +148,14 @@ export const Login = () => {
                 </svg>{" "}
               </div>
               <div className="div">
-                <h5>Password</h5>
-                <input type="password" className="input" />
+                <input
+                  type="password"
+                  className="input"
+                  placeholder="Password"
+                  onChange={(e) => {
+                    setUserData({ ...userData, password: e.target.value });
+                  }}
+                />
               </div>
             </div>
             <a href="#">Forgot Password?</a>
@@ -135,14 +163,20 @@ export const Login = () => {
               <button
                 type="button"
                 className="mt-5  px-28 text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm  py-2.5 text-center mr-2 mb-2"
-                onClick={() => setDisable(false)}
+                onClick={(e) => {
+                  setDisable(false);
+                  handleLogin(e);
+                }}
               >
                 Login..
               </button>
               <button
                 type="button"
                 className="mt-1 px-28 mb-5  text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm  py-2.5 text-center mr-2 "
-                onClick={() => setDisable(true)}
+                onClick={(e) => {
+                  setDisable(true);
+                  handleSignup(e);
+                }}
               >
                 Signup
               </button>
