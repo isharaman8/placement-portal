@@ -4,7 +4,7 @@ import { Schema as MySchema } from 'mongoose';
 
 export type UserDocument = User & Document;
 
-export type TRole = 'student' | 'admin';
+export type TRole = 'student' | 'admin' | 'employer';
 
 @Schema({ timestamps: true })
 export class User {

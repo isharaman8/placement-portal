@@ -20,9 +20,9 @@ export class CompaniesService {
           HttpStatus.UNAUTHORIZED,
         );
 
-      if (req.user.role !== 'admin')
+      if (req.user.role === 'student' || req.user.role === 'employer')
         throw new HttpException(
-          'Students cannot create job openings',
+          'Students or employer cannot create job openings',
           HttpStatus.UNAUTHORIZED,
         );
 
@@ -46,6 +46,10 @@ export class CompaniesService {
         name: dto.name,
         description: dto.description,
         author: user._id.toString(),
+        currentlyHiring: dto.currentlyHiring || false,
+        numOpenings: dto.numOpenings,
+        jobDescription: dto.jobDescription,
+        location: dto.location,
       };
 
       // console.log(payload);
@@ -118,10 +122,16 @@ export class CompaniesService {
     }
   }
 
-  async getAllCompanies() {
+  async getAllCompanies(query: any) {
     try {
+      const { currentlyHiring } = query;
+      const queryObject = {};
+      if (currentlyHiring)
+        queryObject['currentlyHiring'] =
+          currentlyHiring === 'true' ? true : false;
+
       const allCompanies = await this.companyModel
-        .find()
+        .find(queryObject)
         .populate({ path: 'author', select: { name: 1, _id: 0 } })
         .populate({ path: 'usersApplied', select: { name: 1, _id: 0 } });
       return allCompanies;
@@ -165,6 +175,50 @@ export class CompaniesService {
       return updatedCompany;
     } catch (error) {
       return { message: error.message };
+    }
+  }
+
+  async updateCompany(req: any, dto: any) {
+    try {
+      if (!req?.user)
+        throw new HttpException(
+          'Unauthorized request, no token found',
+          HttpStatus.UNAUTHORIZED,
+        );
+
+      if (req.user.role === 'student' || req.user.role === 'employer')
+        throw new HttpException(
+          'Students or employer cannot create job openings',
+          HttpStatus.UNAUTHORIZED,
+        );
+
+      const user = await this.userModel.findOne({ emailID: req.user.emailID });
+
+      if (!user)
+        throw new HttpException('No user Found', HttpStatus.BAD_REQUEST);
+
+      const company = await this.companyModel.findByIdAndUpdate(
+        dto.companyID.toString(),
+        { ...dto, companyID: undefined },
+        { new: true },
+      );
+
+      if (!company)
+        throw new HttpException('No company found', HttpStatus.BAD_REQUEST);
+
+      return company;
+    } catch (err) {
+      console.log(err);
+      if (
+        err.status === HttpStatus.BAD_REQUEST ||
+        err.status === HttpStatus.UNAUTHORIZED
+      ) {
+        throw new HttpException(err.message, err.status);
+      }
+      throw new HttpException(
+        'Something Went Wrong, ' + err.message,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }

@@ -23,6 +23,18 @@ export class Company {
     sparse: true,
   })
   usersApplied: string[];
+
+  @Prop({ required: true })
+  numOpenings: number;
+
+  @Prop({ required: true })
+  jobDescription: string;
+
+  @Prop({ default: false, required: true })
+  currentlyHiring: boolean;
+
+  @Prop()
+  location: string;
 }
 
 export const CompanySchema = SchemaFactory.createForClass(Company);

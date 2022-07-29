@@ -4,6 +4,8 @@ import {
   Delete,
   Get,
   Post,
+  Put,
+  Query,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -30,8 +32,8 @@ export class CompaniesController {
   }
 
   @Get('getallcompanies')
-  async getAllCompanies() {
-    return this.companyService.getAllCompanies();
+  async getAllCompanies(@Query() query: any) {
+    return this.companyService.getAllCompanies(query);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -41,6 +43,13 @@ export class CompaniesController {
     @Body() dto: { companyID: string },
   ) {
     const data = await this.companyService.applyForCompany(req, dto.companyID);
+    return data;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put('updatecompanydata')
+  async updateCompany(@Request() req: any, @Body() dto: any) {
+    const data = await this.companyService.updateCompany(req, dto);
     return data;
   }
 }
