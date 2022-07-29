@@ -1,6 +1,10 @@
 import React from "react";
-import { AdminSidebar } from "../Component/Sidebar/Admin/AdminSidebar";
+import AddCompanyForm from "../Component/Form/AddCompanyForm";
 
 export const Admin = () => {
-  return <div>  </div>;
+  return (
+    <div>
+      <AddCompanyForm />
+    </div>
+  );
 };
