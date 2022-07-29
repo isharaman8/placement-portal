@@ -1,17 +1,46 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 export const UserSidebar = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
     { title: "Dashboard", src: "Chart_fill" },
+    { title: "All User", src: "User" },
     { title: "Profile", src: "User", gap: true },
     { title: "Company ", src: "Calendar" },
-    { title: "Search", src: "Search" },
     { title: "Analytics", src: "Chart" },
     { title: "Notifications ", src: "Folder", gap: true },
   ];
 
+  const navigate = useNavigate();
   const handleClick = (title: string) => {
-    console.log();
+    switch (title) {
+      case "Dashboard":
+        navigate("/");
+        break;
+      case "All User":
+        navigate("/alluser");
+        break;
+
+      case "Profile":
+        navigate("/profile");
+        break;
+      case "Students":
+        navigate("/students");
+        break;
+      case "Company ":
+        navigate("/company");
+
+        break;
+      case "Analytics":
+        navigate("/placementdata");
+        break;
+      case "Notifications ":
+        navigate("/notification");
+        break;
+
+      default:
+        return;
+    }
   };
   return (
     <div className="w-64 fixed ">

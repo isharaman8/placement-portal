@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { userLoginRequest, userSignUpRequest } from "../Redux/Actions/action";
 import "./login.css";
+import { connect } from "react-redux";
+
 export const Login = () => {
   const [disable, setDisable] = useState(false);
   const [userData, setUserData] = useState({
@@ -8,10 +12,12 @@ export const Login = () => {
     password: "",
     role: "",
   });
+  const dispatch: any = useDispatch();
 
   const handleSignup = (event: any) => {
     event.preventDefault();
     console.log(userData);
+    dispatch(userSignUpRequest(userData));
   };
   const handleLogin = (event: any) => {
     event.preventDefault();
@@ -19,6 +25,8 @@ export const Login = () => {
       emailID: userData.emailID,
       password: userData.password,
     };
+    dispatch(userLoginRequest(obj));
+
     console.log(obj);
   };
   return (

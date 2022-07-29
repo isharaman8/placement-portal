@@ -9,17 +9,25 @@ import PlacementData from "./Page/PlacementData";
 import { Login } from "./Page/Login";
 import { Navbar } from "./Component/Navbar/Navbar";
 import { UserSidebar } from "./Component/Sidebar/User/UserSidebar";
+import AddCompanyForm from "./Component/Form/AddCompanyForm";
+import { Admin } from "./Page/Admin";
+import { UserProfile } from "./Page/UserProfile";
 
 function App() {
   return (
     <div className="bg-slate-600">
       <Navbar />
-
+      <div className=" absolute left-1 top-20">
+        <UserSidebar />
+      </div>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
+        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/admin/form" element={<AddCompanyForm />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/notification" element={<Notifications />}></Route>
         <Route path="/alluser" element={<AllUser />}></Route>
+        <Route path="/profile" element={<UserProfile />}></Route>
         <Route path="/company" element={<Compney />}></Route>
         <Route path="/placementdata" element={<PlacementData />}></Route>
       </Routes>

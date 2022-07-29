@@ -15,9 +15,9 @@ const HomePage = () => {
   return (
     <div>
       {" "}
-      <div className="absolute top-20 left-1">
+      {/* <div className="absolute top-20 left-1">
         <UserSidebar />
-      </div>
+      </div> */}
       <div className="px-36">
         <h1 className="text-4xl text-center py-5 font-semibold">
           Current Hiring Companies Page - {(page - 1) * 3 + " " + page * 3}{" "}

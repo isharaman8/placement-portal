@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 export const AdminSidebar = () => {
   const [open, setOpen] = useState(true);
@@ -12,6 +13,38 @@ export const AdminSidebar = () => {
     { title: "Notifications ", src: "Folder", gap: true },
     { title: "Setting", src: "Setting" },
   ];
+
+  const navigate = useNavigate();
+  const handleClick = (title: string) => {
+    switch (title) {
+      case "Dashboard":
+        navigate("/");
+        break;
+      case "Form":
+        navigate("/admin/form");
+        break;
+      case "Students":
+        navigate("/admin/students");
+        break;
+      case "Company ":
+        navigate("/admin/company");
+        break;
+      case "Search":
+        navigate("/admin/search");
+        break;
+      case "Analytics":
+        navigate("/admin/analytics");
+        break;
+      case "Notifications ":
+        navigate("/admin/notifications");
+        break;
+      case "Setting":
+        navigate("/admin/setting");
+        break;
+      default:
+        return;
+    }
+  };
   return (
     <div className="w-64 fixed">
       <div className="flex w-full">
@@ -21,7 +54,7 @@ export const AdminSidebar = () => {
           } bg-dark-purple  p-5 h-screen  pt-8 relative duration-300`}
         >
           <img
-            src="./src/assets/control.png"
+            src=".src/assets/control.png"
             className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple bg-black
            border-2 rounded-full  ${open && "rotate-180"}`}
             onClick={() => setOpen(!open)}
@@ -29,7 +62,7 @@ export const AdminSidebar = () => {
 
           <div className="flex gap-x-4 items-center">
             <img
-              src="./src/assets/logo.png"
+              src=".src/assets/logo.png"
               className={`cursor-pointer duration-500  ${
                 open && "rotate-[360deg]"
               }`}
@@ -52,12 +85,12 @@ export const AdminSidebar = () => {
                   index === 0 && "bg-light-white"
                 } `}
               >
-                <img src={`./src/assets/${Menu.src}.png`} />
+                <img src={`.src/assets/${Menu.src}.png`} />
                 <span
                   className={`${open && "hidden"} origin-left duration-200`}
-                  // onClick={() => {
-                  //   handleClick(Menu.title);
-                  // }}
+                  onClick={() => {
+                    handleClick(Menu.title);
+                  }}
                 >
                   {Menu.title}
                 </span>

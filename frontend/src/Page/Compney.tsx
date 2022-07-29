@@ -17,9 +17,9 @@ const Compney = () => {
 
   return (
     <div>
-      <div className="absolute top-20 left-1">
+      {/* <div className="absolute top-20 left-1">
         <RecruiterSidebar />
-      </div>
+      </div> */}
 
       <h1 className="py-5 text-center text-3xl font-semibold" ref={cardRef}>
         All The Upcoming Companies On This Week
