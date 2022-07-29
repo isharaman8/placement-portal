@@ -1,6 +1,10 @@
 import axios from "axios";
 import { Dispatch } from "react";
-import { USER_LOGIN, USER_SIGNUP } from "../ActionTypes/actionType";
+import {
+  USER_LOGIN,
+  USER_LOGOUT,
+  USER_SIGNUP,
+} from "../ActionTypes/actionType";
 
 export const userSignup = (payload: any) => {
   return {
@@ -10,12 +14,16 @@ export const userSignup = (payload: any) => {
 };
 
 export const userLogin = (payload: any) => {
+  console.log(payload, "login");
   return {
     type: USER_LOGIN,
     payload: payload,
   };
 };
 
+export const userLogout = (payload: any) => {
+  return { type: USER_LOGOUT, payload: payload };
+};
 export const userSignUpRequest = (payload: any) => (dispatch: any) => {
   console.log(payload, "payload");
   axios
@@ -25,7 +33,7 @@ export const userSignUpRequest = (payload: any) => (dispatch: any) => {
     )
     .then((res) => {
       console.log(res.data);
-      dispatch(userSignup(payload));
+      dispatch(userSignup(res.data.payload));
     })
     .catch((err) => {
       console.log(err);
@@ -40,7 +48,7 @@ export const userLoginRequest = (payload: any) => (dispatch: any) => {
     )
     .then((res) => {
       console.log(res.data);
-      dispatch(userLogin(payload.payload));
+      dispatch(userLogin(res.data.payload));
     })
     .catch((err) => {
       console.log(err);

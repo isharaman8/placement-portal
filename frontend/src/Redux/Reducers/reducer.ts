@@ -1,7 +1,12 @@
-import { USER_SIGNUP } from "../ActionTypes/actionType";
+import {
+  USER_LOGIN,
+  USER_LOGOUT,
+  USER_SIGNUP,
+} from "../ActionTypes/actionType";
 
 const initialState: any = {
-  userSingup: [],
+  userSignup: {},
+  userLogin: {},
 };
 
 export const reducer = (
@@ -13,6 +18,16 @@ export const reducer = (
       return {
         ...state,
         userSignup: payload,
+      };
+    case USER_LOGIN:
+      return {
+        ...state,
+        userLogin: payload,
+      };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        userLogin: {},
       };
     default:
       return state;
