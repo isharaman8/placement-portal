@@ -43,7 +43,7 @@ export const UserSidebar = () => {
     }
   };
   return (
-    <div className="w-64 fixed ">
+    <div className="w-64 fixed z-50  ">
       <div className="flex w-full">
         <div
           className={` ${

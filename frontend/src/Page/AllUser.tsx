@@ -13,11 +13,8 @@ const AllUser = () => {
   };
   return (
     <div>
-      {/* <div className="absolute top-20 left-1">
-        <AdminSidebar />
-      </div> */}
-      <div className="space-y-4 px-20 py-5 pt-20 ml-8">
-        {users.slice((page - 1) * 8, page * 8).map((item) => (
+      <div className="grid grid-cols-5 gap-3 pt-20 ml-24">
+        {users.slice((page - 1) * 10, page * 10).map((item) => (
           <AllUserCard num={item} />
         ))}
 
