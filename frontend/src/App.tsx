@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="bg-slate-600">
       <Navbar />
-      <div className=" absolute left-1 top-20">
+      <div className=" absolute left-1 top-20 lg:hidden">
         <UserSidebar />
       </div>
       <Routes>

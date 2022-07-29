@@ -34,7 +34,7 @@ export const Navbar = () => {
         <div className="bg-slate-800 flex items-center justify-center text-slate-100 space-x-4 mr-12">
           <div className="ml-20  bg-slate-800 flex items-center justify-center md:pr-3 md:mr-2">
             <input
-              className=" lg:hidden shadow appearance-none border rounded-sm w-full py-0.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" lg:hidden shadow appearance-none border rounded-lg w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="text"
               placeholder="Search..."
@@ -58,7 +58,7 @@ export const Navbar = () => {
           </div>
           <div>
             <svg
-              className="w-6 h-6"
+              className="w-6 h-6 lg:mr-3"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

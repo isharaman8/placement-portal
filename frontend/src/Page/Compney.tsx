@@ -17,14 +17,10 @@ const Compney = () => {
 
   return (
     <div>
-      {/* <div className="absolute top-20 left-1">
-        <RecruiterSidebar />
-      </div> */}
-
       <h1 className="py-5 text-center text-3xl font-semibold" ref={cardRef}>
         All The Upcoming Companies On This Week
       </h1>
-      <div className="px-36 py-5 space-y-2">
+      <div className="px-36 py-5 space-y-2 ">
         {companies.slice((page - 1) * 5, page * 5).map((item) => (
           <CompenyCard num={item} />
         ))}
