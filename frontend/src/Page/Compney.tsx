@@ -8,11 +8,11 @@ const Compney = () => {
   return (
     <div>
       {" "}
-      <div className=" absolute left-0 top-20">
+      <div className=" absolute left-1 top-20">
         {" "}
         <RecruiterSidebar />
       </div>
-      <div className="px-36 py-5 space-y-2">
+      <div className="px-36 py-5 space-y-2 pt-20">
         {compenies.map((item) => (
           <CompenyCard />
         ))}

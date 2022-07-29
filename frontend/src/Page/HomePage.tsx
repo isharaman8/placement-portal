@@ -7,7 +7,7 @@ const HomePage = () => {
   const [companies, setCompanies] = useState([1, 2, 3, 4, 5]);
   return (
     <div className=" ">
-      <div className=" absolute left-0 top-20">
+      <div className=" absolute left-1 top-20 ">
         {" "}
         <UserSidebar />
       </div>{" "}

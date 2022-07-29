@@ -3,9 +3,9 @@ import { UserSidebar } from "../Component/Sidebar/User/UserSidebar";
 const PlacementData = () => {
   return (
     <div>
-      <div>
+      <div className="bg-slate-600">
         {" "}
-        <div className=" absolute left-0 top-20">
+        <div className=" absolute left-1 top-20">
           {" "}
           <UserSidebar />
         </div>

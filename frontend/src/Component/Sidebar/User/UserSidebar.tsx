@@ -10,15 +10,17 @@ export const UserSidebar = () => {
     { title: "Notifications ", src: "Folder", gap: true },
   ];
 
-  // const handleClick = () => {
-  //   console.log();
-  // };
+  const handleClick = (title: string) => {
+    console.log();
+  };
   return (
-    <div className="w-64 fixed">
+    <div className="w-64 fixed ">
       <div className="flex w-full">
         <div
           className={` ${
-            !open ? "w-64 bg-slate-700" : "w-20 bg-slate-700"
+            !open
+              ? "w-64 bg-slate-700 rounded-md"
+              : "w-20 bg-slate-700 rounded-md"
           } bg-dark-purple  p-5 h-screen  pt-8 relative duration-300`}
         >
           <img
@@ -56,9 +58,9 @@ export const UserSidebar = () => {
                 <img src={`./src/assets/${Menu.src}.png`} />
                 <span
                   className={`${open && "hidden"} origin-left duration-200`}
-                  // onClick={() => {
-                  //   handleClick(Menu.title);
-                  // }}
+                  onClick={() => {
+                    handleClick(Menu.title);
+                  }}
                 >
                   {Menu.title}
                 </span>

@@ -13,7 +13,7 @@ import { UserSidebar } from "./Component/Sidebar/User/UserSidebar";
 
 function App() {
   return (
-    <div className="">
+    <div className="bg-slate-600">
       <Navbar />
       {/* <div>
           {" "}
