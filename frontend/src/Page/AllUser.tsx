@@ -5,9 +5,7 @@ import AllUserCard from "../Component/Card/AllUserCard";
 import PaginationComponent from "../Component/PaginationComponent";
 
 const AllUser = () => {
-	const [users, setUsers] = useState([
-		1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-	]);
+	const [users, setUsers] = useState([]);
 	const store = useSelector((store: any) => store.userLogin);
 	const [token, setToken] = useState(store?.data?.token);
 
@@ -21,6 +19,7 @@ const AllUser = () => {
 			},
 		});
 		console.log(data);
+		console.log(users);
 		setUsers(data.data);
 	};
 	useEffect(() => {

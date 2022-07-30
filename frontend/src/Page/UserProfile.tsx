@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../Redux/Actions/action";
+// import { userLogin } from "../Redux/Actions/action";
+import socket from "../utils/socket";
 
 interface IProps {
 	user?: any;
@@ -19,6 +20,23 @@ export const UserProfile = ({ user, getAllUsers }: IProps) => {
 		const url =
 			"https://placements-backend-hackathon.herokuapp.com/auth/addfriends";
 
+		// axios
+		// 	.put(
+		// 		url,
+		// 		{ userID: user._id },
+		// 		{ headers: { Authorization: `Bearer ${store?.data?.token}` } }
+		// 	)
+		// 	.then(() => {
+		// const profileURL =
+		// 	"https://placements-backend-hackathon.herokuapp.com/auth/profile";
+		// axios
+		// 	.get(profileURL, {
+		// 		headers: { Authorization: `Bearer ${store?.data?.token}` },
+		// 	})
+		// 	.then((data: any) => dispatch(userLogin(data.data)))
+		// 	.then(() => getAllUsers && getAllUsers())
+		// 	.catch((err: any) => alert(err.message));
+		// // .catch((err: any) => alert(err.message));
 		axios
 			.put(
 				url,
@@ -26,26 +44,27 @@ export const UserProfile = ({ user, getAllUsers }: IProps) => {
 				{ headers: { Authorization: `Bearer ${store?.data?.token}` } }
 			)
 			.then(() => {
-				// const profileURL =
-				// 	"https://placements-backend-hackathon.herokuapp.com/auth/profile";
-				// axios
-				// 	.get(profileURL, {
-				// 		headers: { Authorization: `Bearer ${store?.data?.token}` },
-				// 	})
-				// 	.then((data: any) => dispatch(userLogin(data.data)))
-				// 	.then(() => getAllUsers && getAllUsers())
-				// 	.catch((err: any) => alert(err.message));
-				// // .catch((err: any) => alert(err.message));
+				socket.emit(
+					"createNotification",
+					{
+						content: `${store?.data?.payload?.name} added you as friend`,
+						notificationfor: user._id,
+					},
+					(data: any) => console.log(data)
+				);
 				getAllUsers && getAllUsers();
-			})
-			.catch((err: any) => alert(err.message));
+			});
+
+		// console.log(getAllUsers());
+		// })
+		// .catch((err: any) => alert(err.message));
 	};
 
 	useEffect(() => {
 		// console.log(store?.data?.payload?.friends?.includes(user._id));
 	}, []);
 
-	console.log(user);
+	// console.log(user);
 	return (
 		<div className="">
 			<section className="w-64  bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">

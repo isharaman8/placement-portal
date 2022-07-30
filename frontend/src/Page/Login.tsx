@@ -9,6 +9,7 @@ import "./login.css";
 import { connect } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import socket from "../utils/socket";
 
 export const Login = () => {
 	const [disable, setDisable] = useState(false);
@@ -39,22 +40,32 @@ export const Login = () => {
 			emailID: userData.emailID,
 			password: userData.password,
 		};
-
 		try {
 			const res = await axios.post(
 				"https://placements-backend-hackathon.herokuapp.com/auth/signin",
 				obj
 			);
+			if (res.data.message === "Invalid email id or password")
+				throw new Error(res.data.message);
+			// console.log(`res`, res);
 			// localStorage.setItem("loggedInUser", JSON.stringify(res));
+			socket.emit(
+				"join",
+				{ userid: res?.data?.payload?.id?.toString() },
+				(data: any) => {
+					console.log(`Socket Connected: ${data}`);
+				}
+			);
 			dispatch(userLogin(res));
 			navigate("/");
 		} catch (error: any) {
+			console.log(error);
 			alert(error.message);
 		}
 
 		// dispatch(userLoginRequest(obj));
 
-		console.log(obj);
+		// console.log(obj);
 	};
 	return (
 		<div className=" bg-[#33be8f]">
@@ -131,9 +142,7 @@ export const Login = () => {
 											<option className="" disabled>
 												Role
 											</option>
-											<option value="admin" className="">
-												Admin
-											</option>
+											<option value="admin">Admin</option>
 											<option value="student">Student</option>
 											<option value="employer">Employer</option>
 										</select>

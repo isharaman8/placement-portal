@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { userLogout } from "../../Redux/Actions/action";
+import socket from "../../utils/socket";
 
 export const Navbar = () => {
 	const user = useSelector((state: any) => state.userLogin);
 	const isEmpty = Object.keys(user).length === 0;
 	const [isOpen, setIsOpen] = useState(false);
+	const [notifications, setNotifications] = useState([]);
+
+	const store = useSelector((store: any) => store.userLogin);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	socket.on("getSingleNotification", (data: any) => {
+		const newNotifications: any[] = [data, ...notifications];
+		setNotifications(newNotifications as any);
+		console.log(`Received Notification: `, data);
+	});
+
+	useEffect(() => {
+		// console.log(store);
+		if (!store?.data) return;
+		// console.log();
+		socket.emit(
+			"findAllNotifications",
+			{ userid: store?.data?.payload?.id },
+			(data: any) => setNotifications(data)
+			// console.log(`All Notifications`, data)
+		);
+	}, []);
+
 	return (
 		<div className="fixed w-full overflow-y-hidden z-50 ">
 			<nav className="navbar navbar-expand-lg bg-slate-800 h-16 flex  items-center justify-between   overflow-hidden">
@@ -51,7 +74,26 @@ export const Navbar = () => {
 							</svg>
 						</button>
 					</div>
-					<div>
+					<div
+						style={{ position: "relative" }}
+						onClick={() => navigate("/notification")}
+					>
+						<sup
+							style={{
+								position: "absolute",
+								right: 0,
+								top: 0,
+								backgroundColor: "red",
+								color: "white",
+								// border: "1px solid white",
+								borderRadius: 100,
+								textAlign: "center",
+								// lineHeight: 100,
+								// padding: 5,
+							}}
+						>
+							{notifications.length}
+						</sup>
 						<svg
 							className="w-6 h-6 lg:mr-3"
 							fill="none"
