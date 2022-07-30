@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from 'src/schemas/user.schema';
 import { Model } from 'mongoose';
@@ -12,17 +12,17 @@ export class CompaniesService {
     @InjectModel(Company.name) private companyModel: Model<CompanyDocument>,
   ) {}
 
-  async addCompanies(req: any, dto: CompanyDto) {
+  async addCompany(req: any, dto: CompanyDto) {
     try {
-      if (!req.user)
+      if (!req?.user)
         throw new HttpException(
           'Unauthorized request, no token found',
           HttpStatus.UNAUTHORIZED,
         );
 
-      if (req.user.role !== 'admin')
+      if (req.user.role === 'student' || req.user.role === 'employer')
         throw new HttpException(
-          'Students cannot create job openings',
+          'Students or employer cannot create job openings',
           HttpStatus.UNAUTHORIZED,
         );
 
@@ -35,12 +35,38 @@ export class CompaniesService {
           HttpStatus.BAD_REQUEST,
         );
 
-      await this.companyModel.create({ ...dto, author: user._id.toString() });
+      // const company = await this.companyModel.find({
+      //   usersApplied: null,
+      // });
 
-      const companies = await this.companyModel.find();
+      // return company;
+      // console.log(user);
 
-      return companies;
+      const payload = {
+        name: dto.name,
+        description: dto.description,
+        author: user._id.toString(),
+        currentlyHiring: dto.currentlyHiring || false,
+        numOpenings: dto.numOpenings,
+        jobDescription: dto.jobDescription,
+        location: dto.location,
+      };
+
+      // console.log(payload);
+      let company: any;
+      try {
+        company = await this.companyModel.create(payload);
+      } catch (err) {
+        return { error: err.message };
+      }
+
+      console.log('done');
+
+      // const companies = await this.companyModel.find();
+
+      return company;
     } catch (err) {
+      console.log(err);
       if (
         err.status === HttpStatus.BAD_REQUEST ||
         err.status === HttpStatus.UNAUTHORIZED
@@ -48,7 +74,7 @@ export class CompaniesService {
         throw new HttpException(err.message, err.status);
       }
       throw new HttpException(
-        'Something Went Wrong',
+        'Something Went Wrong, ' + err.message,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -96,14 +122,103 @@ export class CompaniesService {
     }
   }
 
-  async getAllCompanies() {
+  async getAllCompanies(query: any) {
     try {
+      const { currentlyHiring } = query;
+      const queryObject = {};
+      if (currentlyHiring)
+        queryObject['currentlyHiring'] =
+          currentlyHiring === 'true' ? true : false;
+
       const allCompanies = await this.companyModel
-        .find()
-        .populate({ path: 'author', select: { name: 1, _id: 0 } });
+        .find(queryObject)
+        .populate({ path: 'author', select: { name: 1, _id: 0 } })
+        .populate({ path: 'usersApplied', select: { name: 1, _id: 0 } });
       return allCompanies;
     } catch (err) {
       return { message: err.message };
+    }
+  }
+
+  async applyForCompany(req: any, companyID: string) {
+    try {
+      if (!req.user)
+        throw new HttpException(
+          'Unauthorized request, no token found',
+          HttpStatus.UNAUTHORIZED,
+        );
+
+      const user = await this.userModel.findOne({ emailID: req.user.emailID });
+
+      const { _id } = user._id;
+
+      // console.log('userId:', _id);
+
+      if (!user)
+        throw new HttpException('No user found', HttpStatus.BAD_REQUEST);
+
+      const updatedCompany = await this.companyModel.findOneAndUpdate(
+        {
+          _id: companyID,
+          usersApplied: { $not: { $in: [_id] } },
+        },
+        { $push: { usersApplied: user._id.toString() } },
+        {
+          new: true,
+          populate: { path: 'usersApplied', select: { name: 1, _id: 0 } },
+        },
+      );
+
+      if (!updatedCompany)
+        throw new HttpException('No company found', HttpStatus.NOT_FOUND);
+
+      return updatedCompany;
+    } catch (error) {
+      return { message: error.message };
+    }
+  }
+
+  async updateCompany(req: any, dto: any) {
+    try {
+      if (!req?.user)
+        throw new HttpException(
+          'Unauthorized request, no token found',
+          HttpStatus.UNAUTHORIZED,
+        );
+
+      if (req.user.role === 'student' || req.user.role === 'employer')
+        throw new HttpException(
+          'Students or employer cannot create job openings',
+          HttpStatus.UNAUTHORIZED,
+        );
+
+      const user = await this.userModel.findOne({ emailID: req.user.emailID });
+
+      if (!user)
+        throw new HttpException('No user Found', HttpStatus.BAD_REQUEST);
+
+      const company = await this.companyModel.findByIdAndUpdate(
+        dto.companyID.toString(),
+        { ...dto, companyID: undefined },
+        { new: true },
+      );
+
+      if (!company)
+        throw new HttpException('No company found', HttpStatus.BAD_REQUEST);
+
+      return company;
+    } catch (err) {
+      console.log(err);
+      if (
+        err.status === HttpStatus.BAD_REQUEST ||
+        err.status === HttpStatus.UNAUTHORIZED
+      ) {
+        throw new HttpException(err.message, err.status);
+      }
+      throw new HttpException(
+        'Something Went Wrong, ' + err.message,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }

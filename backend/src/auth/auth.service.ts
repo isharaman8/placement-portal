@@ -36,6 +36,7 @@ export class AuthService {
         role: user?.role || 'student',
         id: user._id,
         companiesApplied: user.companiesApplied || [],
+        friends: user.friends,
       };
 
       const token = this.jwtService.sign(payload);
@@ -81,6 +82,7 @@ export class AuthService {
         name: user.name,
         id: user._id,
         companiesApplied: user.companiesApplied || [],
+        friends: user.friends,
       };
 
       const token = this.jwtService.sign(payload);
@@ -114,6 +116,7 @@ export class AuthService {
         role: updatedUser?.role || 'student',
         id: updatedUser._id,
         companiesApplied: updatedUser.companiesApplied || [],
+        friends: updatedUser.friends,
       };
 
       const token = this.jwtService.sign(payload);
@@ -160,6 +163,93 @@ export class AuthService {
         'Something Went Wrong',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
+    }
+  }
+
+  async addfriend(req: any, userID: string) {
+    try {
+      if (!req?.user)
+        throw new HttpException('No token provided', HttpStatus.UNAUTHORIZED);
+
+      const user = await this.userModel.findOne({ emailID: req.user.emailID });
+
+      if (!user || Object.keys(user).length === 0)
+        throw new HttpException(
+          'Invalid email id or password',
+          HttpStatus.BAD_REQUEST,
+        );
+
+      if (
+        Array.isArray(user.friends) &&
+        user.friends.some((c: any) => c._id.toString() === userID)
+      )
+        throw new HttpException(
+          'User already exist as friend',
+          HttpStatus.BAD_REQUEST,
+        );
+
+      const updatedUser = await this.userModel.findOneAndUpdate(
+        { emailID: user.emailID },
+        { $push: { friends: userID } },
+        { new: true, populate: { path: 'friends', select: { name: 1 } } },
+      );
+      return updatedUser;
+    } catch (err) {
+      switch (err.status) {
+        case HttpStatus.BAD_REQUEST:
+          return { message: err.message };
+
+        default:
+          return { message: `Something went wrong` };
+      }
+    }
+  }
+
+  async removeFriend(req: any, userID: string) {
+    try {
+      if (!req?.user)
+        throw new HttpException('No token provided', HttpStatus.UNAUTHORIZED);
+
+      const user = await this.userModel.findOne({ emailID: req.user.emailID });
+
+      if (!user || Object.keys(user).length === 0)
+        throw new HttpException(
+          'Invalid email id or password',
+          HttpStatus.BAD_REQUEST,
+        );
+
+      if (
+        Array.isArray(user.friends) &&
+        user.friends.some((c: any) => c._id.toString() === userID) === false
+      )
+        throw new HttpException(
+          'User not in friend list',
+          HttpStatus.BAD_REQUEST,
+        );
+
+      const updatedUser = await this.userModel.findOneAndUpdate(
+        { emailID: user.emailID },
+        { $pull: { friends: userID } },
+        { new: true, populate: { path: 'friends', select: { name: 1 } } },
+      );
+      return updatedUser;
+    } catch (err) {
+      switch (err.status) {
+        case HttpStatus.BAD_REQUEST:
+          return { message: err.message };
+
+        default:
+          return { message: `Something went wrong, ${err.message}` };
+      }
+    }
+  }
+
+  async getAllUsers() {
+    try {
+      const users = await this.userModel.find();
+      return users;
+    } catch (error) {
+      return { message: error.message };
     }
   }
 }

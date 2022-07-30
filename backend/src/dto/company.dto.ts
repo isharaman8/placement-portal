@@ -1,4 +1,11 @@
-import { IsArray, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 
 export class CompanyDto {
   @IsNotEmpty()
@@ -14,4 +21,19 @@ export class CompanyDto {
   @IsNotEmpty()
   @IsString()
   author: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  numOpenings: number;
+
+  @IsString()
+  @IsNotEmpty()
+  jobDescription: string;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  currentlyHiring: boolean;
+
+  @IsString()
+  location: string;
 }

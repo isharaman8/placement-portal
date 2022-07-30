@@ -1,25 +1,40 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Schema as MySchema } from 'mongoose';
 import Document from 'mongoose';
-import { User } from './user.schema';
+// import { User } from './user.schema';
 
 export type CompanyDocument = Company & Document;
 
 @Schema({ timestamps: true })
 export class Company {
-  @Prop({ unique: true, required: true })
+  @Prop({ required: true })
   name: string;
 
   @Prop()
   description: string;
 
-  @Prop({
-    type: [{ usersApplied: { type: MySchema.Types.ObjectId, ref: 'User' } }],
-  })
-  usersApplied: User;
-
   @Prop({ type: MySchema.Types.ObjectId, ref: 'User' })
-  author: User;
+  author: string;
+
+  @Prop({
+    type: [{ type: MySchema.Types.ObjectId, ref: 'User' }],
+    required: true,
+    unique: true,
+    sparse: true,
+  })
+  usersApplied: string[];
+
+  @Prop({ required: true })
+  numOpenings: number;
+
+  @Prop({ required: true })
+  jobDescription: string;
+
+  @Prop({ default: false, required: true })
+  currentlyHiring: boolean;
+
+  @Prop()
+  location: string;
 }
 
 export const CompanySchema = SchemaFactory.createForClass(Company);

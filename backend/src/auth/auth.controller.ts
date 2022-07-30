@@ -47,4 +47,24 @@ export class AuthController {
     const data = await this.AuthService.deleteaccount(req);
     return data;
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Put('addfriends')
+  async addfriend(@Request() req: any, @Body() dto: { userID: string }) {
+    const data = await this.AuthService.addfriend(req, dto.userID);
+    return data;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('removefriend')
+  async removeFriend(@Request() req: any, @Body() dto: { userID: string }) {
+    const data = await this.AuthService.removeFriend(req, dto.userID);
+    return data;
+  }
+
+  @Get('allusers')
+  async getAllUsers() {
+    const data = await this.AuthService.getAllUsers();
+    return data;
+  }
 }
