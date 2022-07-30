@@ -3,11 +3,12 @@ import React from "react";
 import { UserProfile } from "../../Page/UserProfile";
 
 interface props {
-  num: number;
+	user?: any;
+	getAllUsers: () => void;
 }
 
-const AllUserCard = ({ num }: props) => {
-  return <UserProfile />;
+const AllUserCard = ({ user, getAllUsers }: props) => {
+	return <UserProfile getAllUsers={getAllUsers} user={user} />;
 };
 
 export default AllUserCard;
