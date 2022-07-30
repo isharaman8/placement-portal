@@ -12,7 +12,7 @@ interface IProps {
 export const UserProfile = ({ user, getAllUsers }: IProps) => {
 	// const [arr, setArr] = useState([1, 2, 3, 4, 5, 6, 7, 8]);
 
-	const store = useSelector((store: any) => store.userLogin);
+	const store = useSelector((state: any) => state.login.userLogin);
 	const dispatch = useDispatch();
 
 	const handleAddFriend = async () => {

@@ -8,9 +8,7 @@ import PaginationComponent from "../Component/PaginationComponent";
 import { UserSidebar } from "../Component/Sidebar/User/UserSidebar";
 
 const HomePage = () => {
-	const [companies, setCompanies] = useState([
-		1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-	]);
+	const [companies, setCompanies] = useState([]);
 	const [page, setPage] = React.useState(1);
 	const [isStudent, setIsStudent] = React.useState(false);
 	const navigate = useNavigate();
@@ -18,7 +16,7 @@ const HomePage = () => {
 	const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
 		setPage(value);
 	};
-	const store = useSelector((state: any) => state.userLogin);
+	const store = useSelector((state: any) => state.login.userLogin);
 
 	useEffect(() => {
 		if (!store?.data) navigate("/login");

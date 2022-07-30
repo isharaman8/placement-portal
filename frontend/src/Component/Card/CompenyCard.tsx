@@ -13,7 +13,7 @@ import {
 
 interface props {
 	company: any;
-	getCompanies: () => void;
+	getCompanies?: () => void;
 	userLogout?: (payload: any) => void;
 	userLogin?: (payload: any) => void;
 	userSignUpRequest?: (payload: any) => void;
@@ -32,7 +32,7 @@ const CompenyCard = ({
 // state,
 props) => {
 	const [isStudent, setIsStudent] = useState(false);
-	const store = useSelector((state: any) => state.userLogin);
+	const store = useSelector((state: any) => state.login.userLogin);
 	const [appliedToCompany, setAppliedToCompany] = useState(false);
 	const [currentlyHiring, setCurrentlyHiring] = useState(false);
 
@@ -50,7 +50,7 @@ props) => {
 				{ headers: { Authorization: `Bearer ${store?.data?.token}` } }
 			);
 			// console.log(data);
-			getCompanies();
+			getCompanies && getCompanies();
 		} catch (err: any) {
 			alert(err.message);
 		}
@@ -66,7 +66,7 @@ props) => {
 				{ headers: { Authorization: `Bearer ${store?.data?.token}` } }
 			);
 
-			getCompanies();
+			getCompanies && getCompanies();
 		} catch (error: any) {
 			alert(error.message);
 		}

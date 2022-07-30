@@ -2,15 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { userLogout } from "../../Redux/Actions/action";
+import {
+	addNewNotification,
+	addNotification,
+	emptyNotification,
+	removeNotification,
+} from "../../Redux/Actions/notification.actions";
 import socket from "../../utils/socket";
 
 export const Navbar = () => {
-	const user = useSelector((state: any) => state.userLogin);
+	const user = useSelector((state: any) => state.login.userLogin);
 	const isEmpty = Object.keys(user).length === 0;
 	const [isOpen, setIsOpen] = useState(false);
 	const [notifications, setNotifications] = useState([]);
 
-	const store = useSelector((store: any) => store.userLogin);
+	const store = useSelector((state: any) => state.login.userLogin);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -18,19 +24,26 @@ export const Navbar = () => {
 	socket.on("getSingleNotification", (data: any) => {
 		const newNotifications: any[] = [data, ...notifications];
 		setNotifications(newNotifications as any);
+		dispatch(addNewNotification(data));
 		console.log(`Received Notification: `, data);
 	});
 
+	const storeNotifications = useSelector(
+		(state: any) => state.notifications.notifications
+	);
+
 	useEffect(() => {
-		// console.log(store);
+		console.log(store);
 		if (!store?.data) return;
 		// console.log();
 		socket.emit(
 			"findAllNotifications",
 			{ userid: store?.data?.payload?.id },
-			(data: any) => setNotifications(data)
+			(data: any) => dispatch(addNotification(data))
 			// console.log(`All Notifications`, data)
 		);
+
+		console.log(storeNotifications);
 	}, []);
 
 	return (
@@ -92,7 +105,7 @@ export const Navbar = () => {
 								// padding: 5,
 							}}
 						>
-							{notifications.length}
+							{storeNotifications.length}
 						</sup>
 						<svg
 							className="w-6 h-6 lg:mr-3"
@@ -124,8 +137,10 @@ export const Navbar = () => {
 								className="py-1.5 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 								onClick={() => {
 									dispatch(userLogout({}));
+									dispatch(emptyNotification());
 									localStorage.removeItem("loggedInUser");
 									localStorage.removeItem("SignUpUser");
+
 									navigate("/login");
 								}}
 							>

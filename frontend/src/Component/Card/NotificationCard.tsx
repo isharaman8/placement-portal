@@ -1,5 +1,6 @@
 import { BsThreeDots, BsX } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addNotification } from "../../Redux/Actions/notification.actions";
 import socket from "../../utils/socket";
 
 interface IProps {
@@ -8,7 +9,8 @@ interface IProps {
 }
 
 const NotificationCard = ({ item, handleNotifications }: IProps) => {
-	const store = useSelector((state: any) => state.userLogin);
+	const store = useSelector((state: any) => state.login.userLogin);
+	const dispatch = useDispatch();
 
 	const handleRemoveNotification = () => {
 		socket.emit(
@@ -16,6 +18,7 @@ const NotificationCard = ({ item, handleNotifications }: IProps) => {
 			{ id: store?.data?.payload?.id },
 			(data: any) => {
 				handleNotifications(data);
+				dispatch(addNotification(data));
 			}
 		);
 	};

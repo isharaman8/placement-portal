@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import socket from "../utils/socket";
+import { addNotification } from "../Redux/Actions/notification.actions";
 
 export const Login = () => {
 	const [disable, setDisable] = useState(false);
@@ -28,11 +29,20 @@ export const Login = () => {
 		event.preventDefault();
 		console.log(userData);
 		// dispatch(userSignUpRequest(userData));
-		const res = await axios.post(
-			"https://placements-backend-hackathon.herokuapp.com/auth/signup",
-			userData
-		);
-		localStorage.setItem("SignUpUser", JSON.stringify(res));
+		try {
+			const res = await axios.post(
+				"https://placements-backend-hackathon.herokuapp.com/auth/signup",
+				userData
+			);
+			if (res.data.message === "Invalid email id or password")
+				throw new Error(res.data.message);
+
+			localStorage.setItem("SignUpUser", JSON.stringify(res));
+			dispatch(userLogin(res));
+			navigate("/");
+		} catch (err: any) {
+			alert(err.message);
+		}
 	};
 	const handleLogin = async (event: any) => {
 		event.preventDefault();
@@ -57,6 +67,15 @@ export const Login = () => {
 				}
 			);
 			dispatch(userLogin(res));
+			// dispatch(addNotification())
+
+			socket.emit(
+				"findAllNotifications",
+				{ userid: res?.data?.payload?.id.toString() },
+				(data: any) => {
+					dispatch(addNotification(data));
+				}
+			);
 			navigate("/");
 		} catch (error: any) {
 			console.log(error);

@@ -6,7 +6,7 @@ import PaginationComponent from "../Component/PaginationComponent";
 
 const AllUser = () => {
 	const [users, setUsers] = useState([]);
-	const store = useSelector((store: any) => store.userLogin);
+	const store = useSelector((state: any) => state.login.userLogin);
 	const [token, setToken] = useState(store?.data?.token);
 
 	const getAllUsers = async () => {

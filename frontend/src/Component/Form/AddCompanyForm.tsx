@@ -46,6 +46,8 @@ const AddCompanyForm = ({ token, getCompanies }: IProps) => {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 
+			if (data.data.error) throw new Error(data.data.error);
+
 			console.log(data);
 		} catch (error: any) {
 			console.log(error);
